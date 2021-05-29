@@ -26,3 +26,7 @@
 
 - tsc --init
 - Reference: https://www.typescriptlang.org/tsconfig
+
+### Lession 14
+
+- Explicit .env, do it yourself

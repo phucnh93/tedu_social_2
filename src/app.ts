@@ -28,8 +28,11 @@ class App {
 
   private connectToDatabase() {
     try {
-      const cnn =
-        "mongodb+srv://tedu:cc43fTuaVLZSR4C@cluster0.byiof.mongodb.net/tedu_social?retryWrites=true&w=majority";
+      const cnn = process.env.MONGODB_URI;
+      if (!cnn) {
+        console.log("Connection string invalid");
+        return;
+      }
       mongoose.connect(cnn, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
