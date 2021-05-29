@@ -1,5 +1,6 @@
 import { Route } from "core/interfaces";
 import express, { Router } from "express";
+import mongoose, { connect } from "mongoose";
 
 class App {
   public app: express.Application;
@@ -10,6 +11,7 @@ class App {
     this.port = process.env.PORT || 5000;
 
     this.initializeRoutes(routes);
+    this.connectToDatabase();
   }
 
   public listen() {
@@ -22,6 +24,22 @@ class App {
     routes.forEach((route) => {
       this.app.use("/", route.router);
     });
+  }
+
+  private connectToDatabase() {
+    try {
+      const cnn =
+        "mongodb+srv://tedu:cc43fTuaVLZSR4C@cluster0.byiof.mongodb.net/tedu_social?retryWrites=true&w=majority";
+      mongoose.connect(cnn, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+      });
+      console.log("Database connected...");
+    } catch (error) {
+      console.log("Connect to database error");
+    }
   }
 }
 
