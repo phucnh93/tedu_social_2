@@ -15,7 +15,7 @@ class UserService {
       throw new HttpException(400, "Model is empty");
     }
 
-    const user = this.userSchema.findOne({ email: model.email });
+    const user = await this.userSchema.findOne({ email: model.email });
     if (user) {
       throw new HttpException(400, `Your email ${model.email} already exist.`);
     }
